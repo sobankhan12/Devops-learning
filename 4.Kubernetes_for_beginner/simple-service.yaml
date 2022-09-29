@@ -1,0 +1,12 @@
+kind: Servie
+apiVersion: v1
+metadata:
+  name: drupal-service
+spec:
+  type: NodePort
+  selector:
+    type: frontend
+  ports:
+  - targetPort: 80
+    port: 80
+    nodePort: 30095

@@ -1,0 +1,52 @@
+# kind: NetworkingPolicy
+# apiVersion: netwoking.k8s.io/v1
+# metadata:
+#   name: db-network
+# spec:
+#   podSelector:
+#     matchLables:
+#       role: db
+#   policyTypes:
+#   - ingress
+#   - egress
+#   ingress:
+#   - from:
+#     - podSelector:
+#         matchLables:
+#           name: api-pod
+#       namespaceSelector:
+#         matchLables:
+#           name: prod
+#     - ipBlock:
+#         cidr: 192.168.5.10/32
+  
+#     ports:
+#     - protocol: TCP
+#     - port: 3306
+#   egress:
+#   - to:
+#     - ipBlock:
+#         cidr: 192.168.5.10/32
+apiVersion: netwoking.k8s.io/v1
+kind: NetworkingPolicy
+metadata:
+  name: internal-policy
+spec:
+  policyTypes:
+  - egress:
+    - to:
+      - podSelector:
+          matchLables:
+            name: payroll
+      ports:
+      - protocol: TCP
+      - port: 8080
+    - to:
+      - podSelector:
+          matchLables:
+            name: mysql
+      ports:
+      - protocol: TCP
+      - port: 3306
+
+

@@ -1,0 +1,32 @@
+# kind: PersistantVolumeClaim
+# apiVersion: v1
+# metadata:
+#   name: pvc1
+
+# spec:
+#   slector:
+#     matchLables:
+#       type: low
+#   accessModes:
+#   - ReadWriteOnce
+#   resources:
+#     requests:
+#       storage: 500Mi
+#   PersistantVolumeReclaimPolicy: Delete
+
+
+
+###
+kind: PersistantVolumeClaim
+apiVersion: v1
+metadata:
+  name: log-claim
+
+spec:
+  storageClassName: manual
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 200Mi
+  

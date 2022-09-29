@@ -1,0 +1,107 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: Template for webserver with sg,intance-role and 
+Parameters:
+  ImageId:
+    Type: String
+    Description: 'Linux 2 AMI for Ireland us-east-1 Region'
+    Default: 'ami-033b95fb8079dc481'
+  VpcId:
+    Type: String
+    Description: VPC id
+    Default: vpc-0417ec09c53041e25
+  SubnetId:
+    Type: String
+    Description: Subnet in which to launch an EC2
+    Default: subnet-0bc683251c5bd7e52
+  
+  InstanceType:
+    Type: String
+    Description: Choosing  t2 micro because it is free
+    Default: t2.micro
+  KeyName:
+    Type: String
+    Description: Keypair for ssh and http
+    Default: cf-webkey
+
+Resources:
+  MySecurityGroup:
+    Type: 'AWS::EC2::SecurityGroup'
+    Properties:
+      VpcId: !Ref VpcId
+      GroupDescription: SG to allow SSH access via port 22
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: '22'
+          ToPort: '22'
+          CidrIp: '0.0.0.0/0'
+        - IpProtocol: tcp
+          FromPort: '80'
+          ToPort: '80'
+          CidrIp: 0.0.0.0/0
+      Tags:
+        - Key: Name
+          Value: EC2-SG
+  MyEc2Instance:
+    Type: 'AWS::EC2::Instance'
+    Properties: 
+      ImageId: !Ref ImageId
+      InstanceType: !Ref InstanceType
+      KeyName: !Ref KeyName
+      SecurityGroupIds: 
+        - !Ref MySecurityGroup
+      SubnetId: !Ref SubnetId
+      IamInstanceProfile: !Ref MyInstanceProfile
+      UserData:
+        Fn::Base64: 
+          !Sub |
+            #!/bin/bash
+            yum update -y
+            yum install -y httpd
+            sudo systemctl start httpd.service
+            sudo systemctl enable httpd.service
+            echo "Tank you sir Usama Shujaat for amazing use case" > /var/www/html/index.html
+      Tags:
+        - Key: Name
+          Value: My-web
+
+  MyInstanceProfile:
+    Type: AWS::IAM::InstanceProfile
+    Properties: 
+      InstanceProfileName: ec2-instance-profile-for-web
+      Path: /
+      Roles: 
+       - !Ref MyEc2InstanceRole
+  MyEc2InstanceRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: ec2-instance-role
+      AssumeRolePolicyDocument:
+        Version: 2012-10-17
+        Statement:
+          -
+            Effect: Allow
+            Principal:
+              Service:
+                - ec2.amazonaws.com
+            Action:
+              - sts:AssumeRole
+      Path: /
+
+  InstanceS3Policy:
+    Type: AWS::IAM::Policy
+    Properties:
+      PolicyName: DemoS3Policy
+      PolicyDocument:
+        Version: 2012-10-17
+        Statement:
+          -
+            Effect: Allow
+            Action:
+              - s3:*
+            Resource:
+              - arn:aws:s3:::mysobanbucket/*
+              
+      Roles:
+        -
+          !Ref MyEc2InstanceRole
+

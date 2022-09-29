@@ -1,0 +1,27 @@
+name: Deploying
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: executing remote ssh commands using ssh key
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.AWS_HOST }}
+          username: ${{ secrets.AWS_USER }}
+          key: ${{ secrets.AWS_KEY }}
+          script: |
+            echo "Jump to app folder"
+            cd /home/ubuntu/mynode-repo
+
+            echo "Update app from Git"
+            git pull origin master
+            echo "Run new PM2 actio"
+            pm2 restart all

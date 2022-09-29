@@ -1,0 +1,19 @@
+kind: Pod
+apiVersion: v1
+metadata:
+  name: nginx
+spec:
+  containers:
+  - name: nginx1
+    image: nginx-alpine:latest
+    ports:
+    - containerPort: 80
+      name: nginxPort
+    volumeMounts:
+    - mountPath: /opt
+      name: vlume1
+  volumes:
+  - name: volume1
+    awsElasticBlockStore:
+      volumeID: "volume id"
+      fsType: ex4

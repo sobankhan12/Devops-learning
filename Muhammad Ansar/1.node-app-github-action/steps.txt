@@ -1,0 +1,18 @@
+1) Select ec2 instance with ubuntu ami
+
+
+2) add this script to ec2-user data
+    
+    sudo apt-get update -y
+    sudo apt install nodejs -y
+    sudo apt install npm -y
+    git clone https://github.com/sobankhan12/mynode-repo.git
+    cd mynode-repo
+    npm install
+    sudo npm install pm2 -g
+    pm2 start app.js
+    
+    
+    
+  
+   

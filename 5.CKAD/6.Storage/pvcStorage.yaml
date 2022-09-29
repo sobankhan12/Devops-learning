@@ -1,0 +1,11 @@
+kind: PersistantVolumeClaim
+apiVersion: v1
+metadata:
+  name: pvcstorae
+spec:
+  accessModes:
+  - ReadWriteMany
+  storageClassName: storage-1
+  resources:
+    requests:
+      storage: 50Mi

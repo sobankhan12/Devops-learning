@@ -1,0 +1,11 @@
+docker pull centos:centos7.9.2009
+yum update -y
+yum install httpd wget -y
+cd /var/www/html
+wget "template"
+unzip "unzip"
+rm index.html
+cp -r template/* .
+open new terminal 
+docker commit -c 'CMD ["/usr/sbin/httpd","-D","FOREGROUND"]' "container id " soban252/mycustom3:v1
+

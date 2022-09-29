@@ -1,0 +1,13 @@
+kind: Pod
+apiVersion: v1
+metadata:
+  name: nginx
+spec:
+  containers:
+  - name: nginx
+    image: nginx
+  toleration:
+  - key: spray
+    value: bee
+    operator: Equal
+    effect: NoSchedule

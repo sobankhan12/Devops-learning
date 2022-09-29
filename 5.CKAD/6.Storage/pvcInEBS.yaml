@@ -1,0 +1,13 @@
+kind: PersistantVolume
+apiVersion: v1
+metadata:
+  name: pvcINEBS
+spec:
+  accessModes:
+  - ReadWriteMany
+  capacity:
+    storage: 1Gi
+  awsElasticBlockStore:
+    volumeID: "id of ebs"
+    fsType: ex4
+    

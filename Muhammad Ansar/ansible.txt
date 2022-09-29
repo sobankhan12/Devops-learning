@@ -1,0 +1,12 @@
+- hosts: all
+  tasks:
+  - shell: kubectl create ns argocd
+  - shell: kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+  - shell: kubectl get pods --no-headers --selector=app.kubernetes.io/name=argocd-server -n argocd | awk '{print $3}'
+    register: pod_status
+    until: pod_status.stdout_lines[0] == "Running"
+    retries: 3
+    delay: 50
+  - shell: nohup kubectl port-forward -n argocd svc/argocd-server 8383:443 </dev/null >/dev/null 2>&1 &
+    retries: 1
+    delay: 1

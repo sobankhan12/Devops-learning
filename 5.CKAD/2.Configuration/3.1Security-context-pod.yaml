@@ -1,0 +1,29 @@
+# SECURITY CONTEXT AT THE LEVEL OF PODS OR KUBERNETES
+# kind: Pod
+# apiVersion: v1
+# metadata:
+#   name: "soban"
+# spec:
+#   securityContext:
+#     runAsUser: 1000
+#   containers:
+#   - name: ubuntu
+#     image: ubuntu
+#     command: ["sleep", "2000"]
+# SECURITY CONTEXT AT THE LEVEL OF CONTAINER
+kind: Pod
+apiVersion: v1
+metadata:
+  name: "soban"
+spec:
+
+  containers:
+  - name: ubuntu
+    image: ubuntu
+    command: ["sleep", "2000"]
+    securityContext:
+      runAsUser: 1000
+      #capabilities must be at container level
+      capabilities:
+        add: ["Mac_admin"]
+        

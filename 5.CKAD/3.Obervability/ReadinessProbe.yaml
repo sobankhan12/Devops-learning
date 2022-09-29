@@ -1,0 +1,32 @@
+kind: Pod
+apiVersion: v1
+metadata:
+  name: webserver
+spec:
+  containers:
+  - name: webserver
+    image: stacksimplify/app1:latest
+    ports:
+    - containerPort: 80
+    readinessProbe:
+      httpGet:
+        path: /app/index.html
+        port: 80
+      initialDelaySecond: 10
+      periodSeconds: 5
+      failureThreshold: 8
+# second example
+# kind: Pod
+# apiVersion: v1
+# metadata: 
+#   name: simple-webapp-2
+# spec:
+#   containers:
+#   - name: server
+#     image: kodekloud/webapp-delayed-start
+#     ports:
+#     - containerPort: 8080
+#     liveness:
+#       httpGet:
+#         path: /ready
+#         port: 8080

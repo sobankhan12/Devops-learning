@@ -1,0 +1,155 @@
+#Initialize a git repository
+  git init
+
+#staging file
+  git add .
+
+#commit these changes
+  git commit -m "what ever you explain"
+  git commit  PRESS ENTER and write text in notepad or editor
+
+#add remote repository
+  git remote add <name for your easy understanding>  <url>
+
+#push changes on remote repository 
+  git push <name of your remote repo> branch
+
+# create branch
+  git branch <name of branch>
+
+# swithing branching
+  git checkout <name of branch>
+
+#git logs history
+  git log --name-only --oneline --graph --decorate --since="number days ago" show -- <filename.txt>
+  NOTE
+
+# git stashing
+  git stash
+
+#git stashing apply
+  git stash apply
+
+#git stash list
+  git stash list
+
+#git stash removing
+  git stash drop 
+
+1)How to do unstaged file from staging area?
+   git restore --staged <filename.txt>
+   git reset HEAD <filename.txt>
+   NOTE: due to this those changes in your file will not reverse that you have already done.
+
+2)How delete a latest commit from git history?
+   git reset HEAD~
+   NOTE: due to this only history change but changes in the file will not be deleted.
+
+3)How to backout changes of file?
+   git reset --hard HEAD~1
+   git checkout -- <filename.txt>
+   git restore <filename.txt>
+   NOTE: due to this that you changes in file it will revert changes and status of file will also removed like untracked
+
+4)How to delete file through git?
+   git rm <filename.txt>
+   Note:it will show this file  is staging not in untracking or working directory
+
+5)What will be stage of file if file is deleted from filesystem?
+   file will be show in working directory 
+
+6) How to rename file in git?
+   git mv <currentfilename> <newnameofile>
+   NOTE: file will be in staging area
+
+7)How to delete file in git?
+  git rm <filename>
+
+
+8)How to see log a few days ago?
+  git log --since="2 days ago"
+
+
+9)How to see log of particulary file of directory ?
+  git show -- <filename or directory>
+
+
+10)How to see log in oneline?
+  git log --oneline
+
+
+11) How to see log in graph and decorated?
+   git log --graph --decorate
+
+12) How to make alias in git?
+    git config --globla alias.<aliasname> "commmand"
+
+13)How to edit your alias?
+   vi or subl
+   vi ~/.gitconfig
+
+14)How to ignoring files or directory in git history?
+   open hidden file of .gitignore and write name of file of folder
+   filenam.txt or *.txt foldername/
+
+
+15)How to save work for yourself that is not being tracked in git ?
+   you have to stash git changes that it will not change imapact on git tracking and after that you can also recover your changes back through git stash apply
+
+
+16)New file can be stashing without staging file or commit?
+    No, first time you stage file or commit file then you can use stash on your changes.
+
+
+17)How to stash Untracked files?
+   git stash -u
+
+
+18)How to stash all types mean untrack and track files?
+   git stash -a
+
+
+
+19)How to delete list of stash?
+   git stash drop
+
+
+  
+20) How to recover files from stash and also delete stash list?
+    git stash pop
+
+
+21)How to stash file with any message?
+   git stash save "ddkdkaddkd"
+
+
+22)How to stash apply with specific stash ?
+    git stash apply stash@{0}
+
+
+23)How to delete stash list completely with one command?
+   git stash clear
+   NOTE: it will all also deleted all changes that are being saved in stashing
+
+24)How to Get all stashing work to new branch?
+    git stash branch "stashing branch" 
+
+
+25) How to tag a commit?
+    git tag "tag name"
+
+
+26) How to see tag lis?
+    git tag --list
+  
+27) How to annotate tag ?
+    git tag -a
+
+
+28) How to delete a tag?
+    git tag --delete "tag name"
+
+
+
+
+    

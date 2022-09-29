@@ -1,0 +1,5 @@
+follow this article but use this Dockerfile for successfull Workshop
+https://www.digitalocean.com/community/tutorials/how-to-set-up-laravel-nginx-and-mysql-with-docker-compose-ru
+for Docker installation use this article
+https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-20-04
+
