@@ -6,8 +6,10 @@ spec:
   containers:
   - name: nginx
     image: nginx
-  toleration:
-  - key: spray
-    value: bee
-    operator: Equal
-    effect: NoSchedule
+  tolerations:
+    - key: spray
+      value: bee
+      operator: Equal
+      effect: NoSchedule
+ 
+

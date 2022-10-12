@@ -11,12 +11,18 @@
 #     image: ubuntu
 #     command: ["sleep", "2000"]
 # SECURITY CONTEXT AT THE LEVEL OF CONTAINER
+---
 kind: Pod
 apiVersion: v1
 metadata:
   name: "soban"
 spec:
+  securityContext:
+    runAsGroup: 1002
+    fsGroup: 1003
+    
 
+    
   containers:
   - name: ubuntu
     image: ubuntu
