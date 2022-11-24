@@ -4,18 +4,18 @@ metadata:
   name: Jjob1
 spec:
   schedule: "* * * * *"
-  JobTemplate:
+  jobTemplate:
     spec:
       completions: 3
       parallelism: 3
       template:
         metadata:
           labels:
-            ap:te
+           app: nginx
         spec:
           containers:
-          - name: nginx
-            image: nginx
-            ports:
-            - containerPort: 80
+            - name: nginx
+              image: nginx
+              ports:
+                - containerPort: 80
           restartPolicy: never

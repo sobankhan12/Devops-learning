@@ -42,4 +42,5 @@ spec:
 # to get network policy
 ```bash
 $ kubectl get networkpolicy
+$ kubectl get netpol
 ```

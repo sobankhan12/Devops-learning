@@ -2,6 +2,7 @@
 ## it is used to see used of cpu and memory of each disk
 ```bash
 $ kubectl top node
+$ kubectl logs -f pod1
 ```
 ## first download
 ```bash

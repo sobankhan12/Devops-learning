@@ -27,6 +27,18 @@ $ kubectl get pod webapp -o yaml
 $ kubectl get pod webapp -o yaml  > webapp.yaml
 # how to monitor the state of pods
 $ kubectl get pods -w
+# how to label pod
+$ kubectl label po nginx app=front version=2
+# how to remove label from po
+$ kubectl label po nginx app- 
+# how to see pods with specific label
+$ kubectl get po -l env=prod,bu=finance,tier=frontend
+# count the number of pods with specific label
+$ kubectl get po --selector env=dev --no-headers | wc -l
+# count all replica,pod,deploy with the specific tag
+$ kubectl get all --selector env=dev,bu=finance --no-headers | wc -l
+# to see image which is used by pod
+$ kubectl describe po nginx | grep -i image
 ```
 - example of pod
 ```yaml
