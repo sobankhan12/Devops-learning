@@ -1,0 +1,32 @@
+# apiVersion: v1
+# kind: Pod
+# metadata:
+#   name: mypod
+# spec:
+#   containers:
+#     - name: myfrontend
+#       image: nginx
+#       volumeMounts:
+#       - mountPath: "/var/www/html"
+#         name: mypd
+#   volumes:
+#     - name: mypd
+#       persistentVolumeClaim:
+#         claimName: pvc1
+
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: logger
+spec:
+  containers:
+    - name: myfrontend
+      image: nginx:alpine
+      volumeMounts:
+      - mountPath: "/var/www/nginx"
+        name: mypd
+  volumes:
+    - name: mypd
+      persistentVolumeClaim:
+        claimName: log-claim

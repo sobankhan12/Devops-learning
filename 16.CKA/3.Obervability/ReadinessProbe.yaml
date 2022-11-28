@@ -1,0 +1,43 @@
+kind: Pod
+apiVersion: v1
+metadata:
+  name: webserver
+spec:
+  containers:
+    - name: webserver
+      image: stacksimplify/app1:latest
+      ports:
+        - containerPort: 80
+      readinessProbe:
+        httpGet:
+          path: /app/index.html
+          port: 80
+        initialDelaySeconds: 10
+        periodSeconds: 5
+        failureThreshold: 8
+# second example with readinessProbe and livenessProbe
+---
+kind: Pod
+apiVersion: v1
+metadata:
+  name: simple-webapp-2
+spec:
+  containers:
+    - name: server
+      image: kodekloud/webapp-delayed-start
+      ports:
+        - containerPort: 8080
+      readinessProbe:
+        httpGet:
+          path: /app/index.html
+          port: 8080
+        initialDelaySeconds: 3
+        failureThreshold: 4
+        periodSeconds: 10
+      livenessProbe:
+        httpGet:
+          path: /api/index.html
+          port: 8080
+        initialDelaySeconds: 12
+        periodSeconds: 10
+        failureThreshold: 10

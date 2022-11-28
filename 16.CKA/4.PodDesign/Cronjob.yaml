@@ -1,0 +1,21 @@
+kind: CronJob
+apiVersion: batch/v1
+metadata:
+  name: Jjob1
+spec:
+  schedule: "* * * * *"
+  jobTemplate:
+    spec:
+      completions: 3
+      parallelism: 3
+      template:
+        metadata:
+          labels:
+           app: nginx
+        spec:
+          containers:
+            - name: nginx
+              image: nginx
+              ports:
+                - containerPort: 80
+          restartPolicy: never

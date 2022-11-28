@@ -1,0 +1,11 @@
+# for headless service you use cluster ip none
+kind: Service
+apiVersion: apps/v1
+metadata:
+  name: headlesss-service
+spec: 
+  slector:
+    app: frontend
+  ports:
+  - port: 80
+  clusterIP: None

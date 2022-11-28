@@ -1,1 +1,0 @@
-aws_Region = "us-east-1"
